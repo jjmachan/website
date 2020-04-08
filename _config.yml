@@ -3,9 +3,9 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            jjmachan
-tagline:          'AI Research Engineer'
-description:      'The <a href="http://hyde.getpoole.com" target="_blank">Hyde</a> theme for <a href="http://jekyllrb.com" target="_blank">Jekyll</a>, refreshed.'
+title:            JJmachan
+tagline:          'Research Engineer'
+description:      'A place for my travel stories and thoughts'
 url:              https://jjmachan.github.io
 baseurl:          '/'
                   # the optional subpath of your site, e.g. "/blog"

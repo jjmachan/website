@@ -5,9 +5,7 @@ sidebar_link: true
 ---
 
 <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
+  Welcome to My blog!
 </p>
 
-To make pages show up in the sidebar, add `sidebar_link: true` to the front
-matter.
+The sites still under construction. I'm sorry :(
