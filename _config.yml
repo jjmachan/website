@@ -4,7 +4,7 @@ highlighter:      rouge
 
 # Setup
 title:            JJmachan
-tagline:          'Research Engineer'
+tagline:          'ML Engineer'
 description:      'A place for my travel stories and thoughts'
 url:              https://jjmachan.github.io
 baseurl:          '/'
@@ -19,11 +19,13 @@ author:
   url:            https://twitter.com/jjmachan
 
 paginate:         5
-# paginate_path:    '/page:num'
+# paginate_path:    '/blog/page:num'
                     # Or '/blog/page:num' if you want to move your index pages
 
 disqus:
   shortname: jjmachan
+
+google_analytics: UA-87289472-2
 plugins:
   - jekyll-feed
   - jekyll-gist
