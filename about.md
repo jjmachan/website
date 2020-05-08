@@ -23,3 +23,5 @@ I love travelling, meeting new people and having new experiences.
 It broadens your views about the world and makes you more emphatic (you also have a shit load of fun, obviously!).
 I'm also into photography and love films.
 (*I have some blogs lined up about my travels and photography, so check this space later to read them*)
+
+{% include custom-icon-links.html %}
