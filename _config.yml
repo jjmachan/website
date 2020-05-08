@@ -5,7 +5,7 @@ highlighter:      rouge
 # Setup
 title:            JJmachan
 tagline:          'ML Engineer'
-description:      'A place for my travel stories and thoughts'
+description:      'A place for my travel stories, thoughts and tutorials'
 url:              https://jjmachan.github.io
 baseurl:          '/'
                   # the optional subpath of your site, e.g. "/blog"
