@@ -1,15 +1,18 @@
 ---
-layout: post
 title: "Hangar Tutorial (1/2): Adding your data to Hangar"
-category: MLOps
-excerpt_separator: <!--more-->
+layout: post
+date: 2020-01-28 10:00
+image: "https://cdn-images-1.medium.com/max/800/1*sLLLekH9NMYNH_gIS-l2Eg.png"
+headerImage: true
+tag:
+ - MLOps
+ - Hangar
+ - Version Control 
+star: false
+category: blog
+author: jjmachan
+desciption: A step by step guide to setting up a hangar repo and adding your data to it.
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*sLLLekH9NMYNH_gIS-l2Eg.png)
-*Source:
-[https://www.tech101.in/how-version-control-works/](https://www.tech101.in/how-version-control-works/)*
-
-#### A step by step guide to setting up a hangar repo and adding your data to it.
 
 *Update: Hangar version 0.5 was released a while back and it has renamed
 arraysets to columns, now supports storage of strings in these columns, not only
@@ -26,16 +29,16 @@ for training better deep learning algorithms.
 This is where Hangar comes in.
 
 **Hangar is version control for tensor data.** Its like git but for your tensors
-*ie numeric data. *Using hangar you can time travel through the evolution of the
+ie *numeric data*. Using hangar you can time travel through the evolution of the
 dataset, create different branches for experimenting without any overhead,
 collaborate with multiple people in your organisation in creating the datasets,
 create a local copy with only a subset of the data and many more. Hangar makes
 handling your datasets a breeze.
 
-![](https://cdn-images-1.medium.com/max/800/1*h3ZqORZA4VaHyd3DjaaPBQ.jpeg)
-*Chill man…hangar has you back! (source: quickmeme.com)*
+![chill man](https://cdn-images-1.medium.com/max/800/1*h3ZqORZA4VaHyd3DjaaPBQ.jpeg)
+<figcaption class='caption'>Chill man…hangar has you back! (source: quickmeme.com)
+</figcaption>
 
-<!--more-->
 ### Core Concepts
 
 1.  **Datasets:** This is the collection of data samples that are used for training.
@@ -46,26 +49,28 @@ example in the case of the MNIST dataset, the single 28x28 image is the sample
 while in the case of tabular datasets like the [Titanic
 Dataset](https://www.kaggle.com/c/titanic) in Kaggle, each row is the sample and
 each of the columns are the attributes.
+
 1.  **Columns:** A dataset can be broken down into Columns and that is how they are
 stored in Hangar. It is similar to how columns in tables are. Each sample in the
 dataset is broken down into columns that represent the different attributes of
 that sample. Only when all the attributes (columns) are combined that the sample
 is described fully.
 
-![](https://cdn-images-1.medium.com/max/800/1*Svkl5Q8xLHWfwC-IQf5ytg.png)
-*An illustration to explain Hangar Columns*
+    ![](https://cdn-images-1.medium.com/max/800/1*Svkl5Q8xLHWfwC-IQf5ytg.png)
+    <figcaption class='caption'>An illustration to explain Hangar Columns
+    </figcaption>
 
-Hangar offers 2 types of columns
+    Hangar offers 2 types of columns
 
-1.  Numerical Columns (ndarray): These are columns used to store numerical data in
-numpy like arrays.
-1.  String Columns (str): These columns store data of type String.
+    1.  Numerical Columns (ndarray): These are columns used to store numerical data in
+    numpy like arrays.
+    1.  String Columns (str): These columns store data of type String.
 
-Note: In versions before *Hangar 0.5,* columns used to be called arraysets and
-was used only to store numerical data while metadata, now called String Columns,
-were used to store strings.
+    Note: In versions before *Hangar 0.5,* columns used to be called arraysets and
+    was used only to store numerical data while metadata, now called String Columns,
+    were used to store strings.
 
-3.** Repository:** This is where data is stored as a list of commits in time, in
+3. **Repository:** This is where data is stored as a list of commits in time, in
 various branches by the different contributors that work on it. It is similar to
 a git repository. We typically use one repository per dataset. Each sample of
 data is stored in Columns. There can also be Remote Repositories
@@ -122,12 +127,6 @@ at a given time and has to be properly closed before exiting.
 checkout can be active at a given time.
 
 <script src="https://gist.github.com/jjmachan/822ae9ae3b8817d93d1fc859ecdcb687.js"></script>
-*Now we have to create a checkout of the repo to access the data in it. There are
-two checkout modes.Write-enabled checkout: In this mode, all operations are
-performed on the current state of the staging area. Only one write-enabled
-checkout can be active at a given time and has to be properly closed before
-exiting.Read-only checkout: This mode is used to only read from the repo. More
-than one checkout can be active at a given time.*
 
 This creates a Write-enabled checkout.
 
@@ -140,7 +139,7 @@ This creates a Write-enabled checkout.
 
 As mentioned earlier a dataset is stored as Columns which contain the different
 attributes that describe a sample. To initialize a Column we need the *name,
-dtype(dataType) *and *shape*. We can also show it a *prototype*, which is a
+dtype(dataType)* and *shape*. We can also show it a *prototype*, which is a
 sample array with the correct *dtype* and *shape* as that of the sample data and
 hangar will infer the *shape* and *dtype* of the column from that.
 
@@ -192,6 +191,12 @@ the corresponding samples. You can either use that or the function get( ) for
 columns which return None if no data was found instead of throwing a
 KeyExeption.
 
+```
+colc
+cll
+ll
+```
+
 `column_1[key]`
 
 `column_1.get(key)`
@@ -211,8 +216,10 @@ read/write session and not every single operation individually.
 Now we have the final code to add our MNIST data to columns.
 
 <script src="https://gist.github.com/jjmachan/59036f7f9a2c57337ee0e2d1eb47c04a.js"></script>
-*As an exercise try to execute the code without the context manager (with
-img_col, label_col: line) and see the performance difference.*
+<figcaption class='caption'>
+As an exercise try to execute the code without the context manager (with
+img_col, label_col: line) and see the performance difference.
+</figcaption>
 
 **Commit the Changes**
 
