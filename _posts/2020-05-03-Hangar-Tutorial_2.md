@@ -39,7 +39,7 @@ _**Note:** There is an accompanying GitHub repo with some detailed notebooks
 explaining all of the concepts discussed. You can try that out along with this
 tutorial. [[link](https://github.com/jjmachan/hangar_tutorials)]_
 
-### Where were we..?
+# Where were we..?
 
 So we have learned the core concepts of Hangar and we added our toy dataset
 (MNIST) into Hangar. Today we will continue from where we left off and train a
@@ -160,7 +160,7 @@ let’s create a read-only checkout from the master branch to access the columns
 
     * Checking out BRANCH: master with current HEAD: a=39a36c4fa931e82172f03edd8ccae56bf086129b
 
-### Dataloaders
+# Dataloaders
 
 Now, let’s load the data from Hangar to feed it into our neural network for
 training. Even though you can directly access the data using the checkout, the
@@ -184,7 +184,7 @@ Pytorch DataLoader
 Now, iterating through the trainDataloader will give us the data in batches and
 as tensors ready to be used for training.
 
-### Training
+# Training
 
 We will not go into the details of how models are defined and trained. If you
 find the code below hard to catch up I highly recommend that you check out the
@@ -227,7 +227,7 @@ and voilà!
 
 We have successfully trained our model using the data from Hangar.
 
-### Conclusion
+# Conclusion
 
 By now you should have learned the basics of Hangar, how to define columns
 according to your dataset, add data to these columns and load the data from it
@@ -255,7 +255,7 @@ understanding it.
 
 Cheers :heart:
 
-### *Auxilary*
+## *Auxilary*
 
 This is an auxiliary section which compares two aspects hangar
 
