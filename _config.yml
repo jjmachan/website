@@ -1,9 +1,11 @@
-# main text of home
+# main settings
 name: JJmachan
 bio: Building tools for Software 2.0 | ML Engineer
+url: https://jjmachan.github.io
+permalink: /:title/
 
 # twitter summary info
-description: A blog about ML Engineering and other adventures of JJmachan
+description: A blog about ML engineering and other adventures of JJmachan
 
 # if it's an external image, update below for true
 # better with square images
@@ -15,11 +17,6 @@ picture: assets/images/profile.jpg
 resume: true
 resume-external: true
 resume-url: https://drive.google.com/file/d/15ewuKqgY_sneS2ClOx4WnPpqn8PnZ6Tw/view?usp=sharing
-
-url: https://jjmachan.github.io
-# your url: https://USERNAME.github.io
-
-permalink: /:title/
 
 # To enable google analytics, supply your token below
 analytics-google: UA-87289472-2

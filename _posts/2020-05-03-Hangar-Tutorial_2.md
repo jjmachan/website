@@ -1,10 +1,18 @@
 ---
-layout: post
 title: "Hangar Tutorial (2/2): Training a Model with Versioned Data"
-category: MLOps
-excerpt_separator: <!--more-->
+layout: post
+data: 2020-05-03 11:00
+image:
+headerImage: false
+tag:
+ - MLOps
+ - Hangar
+ - Version Control
+star: false
+category: blog
+author: jjmachan
+description: How to get the data from Hangar and train a PyTorch model.
 ---
-#### How to get the data from Hangar and train a PyTorch model.
 
 In the last tutorial, we introduced Hangar, a python library that helps you
 version control data. Well, data is the new oil and properly managing and
@@ -16,12 +24,16 @@ blog](https://towardsdatascience.com/hangar-tutorial-1-2-adding-your-data-to-han
 do check it out. I discuss the core concepts of Hangar and how to create your
 own Hangar repo there.
 
-![](https://cdn-images-1.medium.com/max/800/1*XNOqVYmgiUaltycEFHwOig.png)
+<div style="width:100%;height:0;padding-bottom:140%;position:relative;">
+  <iframe src="https://giphy.com/embed/HUplkVCPY7jTW" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
+  </iframe>
+</div>
 
-<!--more-->
-
-<span class="figcaption_hack">ML workflow is getting increasingly complex and I think Hangar is a really
-important tool to have in your toolbox.</span>
+<figcaption class='caption'>
+ML workflow is getting increasingly complex and I think Hangar is a really
+important tool to have in your toolbox. 
+<a href="https://giphy.com/gifs/watson-geekout-HUplkVCPY7jTW">(via GIPHY)</a>
+</figcaption>
 
 _**Note:** There is an accompanying GitHub repo with some detailed notebooks
 explaining all of the concepts discussed. You can try that out along with this
@@ -34,7 +46,11 @@ So we have learned the core concepts of Hangar and we added our toy dataset
 model from the data we have added to Hangar. First of all, let’s connect to the
 Hangar repo.
 
+<script src="https://gist.github.com/jjmachan/c4a770a059ee33ef895202425b8ee761.js"></script>
+
 Let's take a quick look at the summary to get an idea of the data in our repo.
+
+<script src="https://gist.github.com/jjmachan/c41c91d6ea95d3f46aae8fd93960735b.js"></script>
 
     Summary of Contents Contained in Data Repository 
      
@@ -140,25 +156,30 @@ As you can see the data is stored in 6 ndarray columns. 2 columns each store the
 image and target pair for the 3 data splits, train, test and validation. Now
 let’s create a read-only checkout from the master branch to access the columns.
 
+<script src="https://gist.github.com/jjmachan/8e5568fd7bcd0f2eb2a0862b4a940c8d.js"></script>
+
     * Checking out BRANCH: master with current HEAD: a=39a36c4fa931e82172f03edd8ccae56bf086129b
 
 ### Dataloaders
 
 Now, let’s load the data from Hangar to feed it into our neural network for
 training. Even though you can directly access the data using the checkout, the
-recommended way is to use the make_torch_dataset. It offers more configurable
+recommended way is to use the `make_torch_dataset`. It offers more configurable
 options and makes it easier to load into PyTorch.
 
 **make_torch_dataset(columns**, *keys: Sequence[str] = None*, *index_range:
 slice = None*, *field_names: Sequence[str] = None***)**
 
-The make_torch_dataset creates a PyTorch Dataset with the columns passed to it.
+The `make_torch_dataset` creates a PyTorch Dataset with the columns passed to it.
 In our example, if we would pass the ‘mnist_training_images’ column and
-‘mnist_training_labels’ column. Now make_torch_dataset will return, for each
+‘mnist_training_labels’ column. Now `make_torch_dataset` will return, for each
 index, a tuple with the image and label corresponding with the index.
 
 Since it returns a PyTorch Dataset we can pass it into a PyTorch DataLoader to
-perform shuffling, batching etc.
+perform shuffling, batching etc. This means we get all the goodness from the
+Pytorch DataLoader
+
+<script src="https://gist.github.com/jjmachan/a07711ea98d42c1358e6444e63844c37.js"></script>
 
 Now, iterating through the trainDataloader will give us the data in batches and
 as tensors ready to be used for training.
@@ -172,9 +193,14 @@ tutorials](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html
 
 We will define a simple 3 layer, fully connected neural network for MNIST.
 
+<script src="https://gist.github.com/jjmachan/1b8e3c853c8817a22cff2038e8c972b7.js"></script>
+
 Now using the dataloader we iterate through batches, do the forward propagation,
 calculate the loss, find the gradients via backpropagation and adjust the model
 parameters, just the standard the neural network training you are familiar with.
+
+<script src="https://gist.github.com/jjmachan/05eac2a88e0dc819e75e5426041aa313.js"></script>
+
 
     [EPOCH 0/10] Train Loss: 1.2083537247954312
     Test Loss: 0.47797256113050846 Accuracy: 0.865814696485623
@@ -227,7 +253,7 @@ even though there is still a lot of work to be done. Hangar is super easy to add
 to your existing ML workflow and hopefully, this tutorial has given you a better
 understanding it.
 
-Cheers
+Cheers :heart:
 
 ### *Auxilary*
 
@@ -252,20 +278,29 @@ there are other formats for your data that will likely offer significant size
 reduction. I have first experience when I tried to save jpeg files in Hangar and
 they took up a significant amount of space.
 
+When I discussed this with the awesome people at TensorWerk (the company
+supporting hangar), they said that this configuration is to ensure best
+read speed/size on disk trade off. You can go into hangar and configure it to
+optimize in which ever way we seem fit but naturally given the fact the compute
+is a lot more expensive than storage, it's wise to optimize for read speeds
+instead. 
+
 So I would advise you to store the data after all the preprocessing is done and
 in the form that is ready to be fed into the models. The original files can be
 compressed and stored in your data lakes.
 
-Second is loading from disk for training. It takes almost 7x more time, which is
-a lot! also in this example, I’m performing a decompression before loading the
-data into memory and still, it just takes around 1sec.
+Second is loading from disk for training. My experiments show hangar turns out
+to be a slower that native implementation or when using the PyTorch
+implementations. 
 
 This is the output from my system.
 
 ![](https://cdn-images-1.medium.com/max/800/1*IXl0EFD-XGI1IrTDl1T4gQ.png)
 
-I tried accessing data directly from columns and its not much improvement. I’m
-not sure what is wrong here but I will discuss with the developers to get a
-better idea.
+In this case the major source of performance dip is because hangar is reading
+directly from file, where as in the other case I have loaded it into memory. But
+I think that there is still a lot of work needed in that direction to improve
+the read and write speeds. Now hangar is still a very small project and still
+under active development. If the project interests you I would recommend you
+checkout the [repo](https://github.com/tensorwerk/hangar-py).
 
-Meanwhile, you check these out and tell me your result. Would love to hear it!
