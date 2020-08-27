@@ -19,7 +19,7 @@ resume-external: true
 resume-url: https://drive.google.com/file/d/15ewuKqgY_sneS2ClOx4WnPpqn8PnZ6Tw/view?usp=sharing
 
 # To enable google analytics, supply your token below
-analytics-google: UA-87289472-2
+analytics-google: UA-176495138-1
 
 # To enable piwik tracking, supply your url & site ID below
 # analytics-piwik-url: 'piwik.my-host.com'
@@ -46,7 +46,7 @@ github: jjmachan
 # medium: medium
 # vimeo: myvimeo
 # lanyrd: mylanyrd
-email: jamesjithin97@gmail.com
+email: hi@jjmachan.in
 
 authors:
   jjmachan:
